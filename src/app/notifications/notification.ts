@@ -18,9 +18,9 @@ import { } from '@types/googlemaps';
 })
 export class Notification {
     @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
-    @ViewChild('gmap') gmapElement: any;
+
    
-    map: google.maps.Map;
+   
     constructor(protected http: Http) {
   
     }
@@ -35,23 +35,11 @@ export class Notification {
         });
 
 
-      var mapProp = {
-        center: new google.maps.LatLng(18.5793, 73.8143),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
      
-      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+  
     }
   
-    setMapType(mapTypeId: string) {
-      this.map.setMapTypeId(mapTypeId)    
-  }
-  
-  setCenter(e:any){
-    e.preventDefault();
-    this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
-  }
+ 
   
     message: string;
   
@@ -67,9 +55,6 @@ export class Notification {
     public mapShowHide: number = 1;
     public review: any = [];
     public n:any=false;
-  
-    latitude:number;
-    longitude:number;
     public rating: number=0; 
     public b: any = false;
   

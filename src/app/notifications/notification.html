@@ -34,34 +34,9 @@
 
 
 
-      <form [hidden]="hidden" class="form-inline" #form="ngForm" (ngSubmit)="setCenter($event)" ac>
-        <label class="col-sm-2 col-form-label">LatLong</label>
-        <div class="form-group">
-          <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="Enter latitude" required>
-        </div>
-
-        <div class="form-group">
-          <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="Enter longitude" required>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Go</button>
-      </form>
       <br>
-      <br>
+      
 
-      <div [hidden]="hidden">
-        <div #gmap style="width:50%;height:200px; margin: 0px 0px 0px 353px"></div>
-      </div>
-
-
-      <br>
-
-      <div [hidden]="hidden" class="form-group row">
-        <div class="col-sm-5" style="margin: 0px 0px 0px 350px">
-          <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
-          <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
-          <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
-        </div>
-      </div>
 
 
 
