@@ -1,1 +1,280 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css";
+@import "https://code.jquery.com/jquery-1.12.4.js";
+@import "https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js";
+@import "https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js";
+
+@import url(https://fonts.googleapis.com/css?family=Orbitron);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:400,700);
+/* Master Styles */
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+  }
+
+  
+  h2, h3 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+  }
+  body {
+    margin: 2em;
+  }
+  body, input[text], button {
+    color: #888;
+    font-family: Cambria, Georgia;
+  }
+  a {
+    cursor: pointer;
+    cursor: hand;
+  }
+  button {
+    font-family: Arial;
+    background-color: rgb(185, 185, 185);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    cursor: hand;
+  }
+  button:hover {
+    background-color: #167299;
+  }
+  button:disabled {
+    background-color: #eee;
+    color: #aaa;
+    cursor: auto;
+  }
+  
+  /* Navigation link styles */
+  nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  nav a:visited, a:link {
+    color: #607D8B;
+  }
+  nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
+  nav a.active {
+    color: #039be5;
+  }
+
+
+  .rating {
+    float:left;
+    margin: 27px -33px 0px -39px;
+    border: none;
+}
+/***************************
+Hides the radio buttons
+***************************/
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+/***************************
+Default stars styles
+***************************/
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+}
+/***************************
+Adds the star symbol to the labels
+***************************/
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+/***************************
+Colour for the applied rating stars
+***************************/
+.rating > input:checked ~ label {
+    color: #f70;
+}
+/***************************
+Colour for hovered stars when increasing the rating
+***************************/
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+/***************************
+Colour for hovered stars when decreasing the rating
+***************************/
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+    .name-detailss-name {
+            color:#454545 ;
+            width:130px;
+            float:left;
+            color:#454545;
+            font-size:11px;
+            margin: -30px 0px 0px 130px;
+            text-align:left !important;
+        }
+
+  .table td, .table th {
+      text-align: center;
+  }
+  
+  /* items class */
+  .items {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 24em;
+  }
+  .items li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+  }
+  .items li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+  .items li.selected:hover {
+    background-color: #BBD8DC;
+    color: white;
+  }
+  .items .text {
+    position: relative;
+    top: -3px;
+  }
+  .items {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 24em;
+  }
+  .items li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 1.6em;
+    border-radius: 4px;
+  }
+  .items li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+  .items li.selected {
+    background-color: #CFD8DC;
+    color: white;
+  }
+  
+  .items li.selected:hover {
+    background-color: #BBD8DC;
+  }
+  .items .text {
+    position: relative;
+    top: -3px;
+  }
+  .items .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color: #607D8B;
+    line-height: 1em;
+    position: relative;
+    left: -1px;
+    top: -4px;
+    height: 1.8em;
+    margin-right: .8em;
+    border-radius: 4px 0 0 4px;
+  }
+  /* everywhere else */
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .padding-top-10{
+    padding: 10px;
+  }
+
+  .form-grid {
+    padding:0;}
+
+  .ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+    clear: both;
+  }
+  
+  
+  /*
+  Copyright 2016 Google Inc. All Rights Reserved.
+  Use of this source code is governed by an MIT-style license that
+  can be found in the LICENSE file at http://angular.io/license
+  */
+
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }

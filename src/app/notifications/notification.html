@@ -1,0 +1,195 @@
+<div >
+
+  <div>
+
+
+
+    <form>
+      <div *ngIf="show==0" class="form-group row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-4">
+          <input type="text" name="task" class="form-control" [(ngModel)]="task.name" placeholder="Name">
+        </div>
+
+        <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" (click)="hidden = !hidden"> {{hidden ? 'show Map' : 'hide Map'}} </button>
+
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Ratings</label>
+        <div class="name-detailss-name">
+          <div>
+            <rating [rating]="rating" (onChange)="ratings($event)"></rating>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label *ngIf="show==1" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input *ngIf="show==1" type="text" name="task" class="form-control" [(ngModel)]="updtask.name" placeholder="Name">
+        </div>
+        <button (click)="taskupd(updtask._id, updtask.name)" *ngIf="show==1" class="btn btn-primary">Update</button>
+      </div>
+
+
+
+      <form [hidden]="hidden" class="form-inline" #form="ngForm" (ngSubmit)="setCenter($event)" ac>
+        <label class="col-sm-2 col-form-label">LatLong</label>
+        <div class="form-group">
+          <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="Enter latitude" required>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="Enter longitude" required>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Go</button>
+      </form>
+      <br>
+      <br>
+
+      <div [hidden]="hidden">
+        <div #gmap style="width:50%;height:200px; margin: 0px 0px 0px 353px"></div>
+      </div>
+
+
+      <br>
+
+      <div [hidden]="hidden" class="form-group row">
+        <div class="col-sm-5" style="margin: 0px 0px 0px 350px">
+          <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+          <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+          <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group row">
+        <div class="col-sm-5">
+
+          <button *ngIf="show==0" type="submit" (click)="showTasks()" class="btn btn-primary">Show Tasks</button>
+          <button *ngIf="show==1" type="submit" (click)="hideTasks()" class="btn btn-primary">Hide Tasks</button>
+
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+    <div class="container">
+      <div class="table-responsive">
+        <table *ngIf="show==1" class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th>Name</th>
+              <th>Created_at</th>
+              <th>Status</th>
+              <th>Ratings</th>
+              <th>Actions</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of tasks; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{data.name}} </td>
+              <td>{{data.Created_Date}}</td>
+              <td>{{data.Status}}</td>
+
+              <td>
+                <div class="col-70 list-details">
+                  <div class="name-detailss-name">
+                    <rating onlyview="true" [rating]="data.Ratings"></rating>
+
+                  </div>
+                </div>
+              </td>
+              <td>
+
+                <button class="btn btn-danger" (click)="delTask(data._id)" icon="fa fa-delete">
+                  Delete
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="updateTask(1, data)" icon="fa fa-delete">
+                  Update
+                </button>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+
+        </table>
+
+
+      </div>
+    </div>
+
+    <ngui-popup #popup></ngui-popup>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <h2>Enter product id</h2>
+                <input type="text" [(ngModel)]="id" required>
+                <button (click)="show()"> Click Me </button>
+                
+              </div>
+              
+              <div >
+                <h2 *ngIf="b">
+                {{data?.id + ' ' +  data?.name}}
+              </h2>
+              
+              </div>
+              
+              </div>
+              
+              
+              <div style="margin:left; text-align:left">
+              Id:
+                <input type="text" [(ngModel)]="products.id" name="id" required> <br>
+                Name:
+                <input type="text" [(ngModel)]="products.name" name="name" required> <br>
+                Price:
+                <input type="text" [(ngModel)]="products.price" name="price" required> <br>
+               
+                <button (click)="store()">Store </button>
+              
+              
+              </div>
+              
+              
+              <div style="margin:left; text-align:left">
+                Name:
+                <input type="text" [(ngModel)]="user.name" name="name" required> <br>
+                Email:
+                  <input type="text" [(ngModel)]="user.email" name="email" required> <br>
+                  Password:
+                  <input type="text" [(ngModel)]="user.password" name="password" required> <br>
+                 Confirm Password:
+                  <input type="text" [(ngModel)]="user.c_password" name="c_password" required> <br>
+                 
+                  <button (click)="register()">Register user </button>
+                
+                
+                </div>
+              
+               -->

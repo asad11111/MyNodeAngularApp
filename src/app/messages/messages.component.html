@@ -1,0 +1,18 @@
+<div *ngFor="let message of messages">
+    <b>{{ message.user }}</b>: {{ message.text }}
+  </div>
+
+
+  <label for="userName">Username</label>
+<input type="text" id="user" [(ngModel)]="user">
+
+<label for="message">Message</label>
+<input type="text" id="text" [(ngModel)]="text">
+
+<button (click)="sendMessage(user, text)">Send</button>
+<button (click)="init()">Init</button>
+<button (click)="addSerie()">Add Serie</button>
+<button (click)="removeSerie()">Remove Serie</button>
+<button (click)="addPoint()">Add Point</button>
+<button (click)="removePoint()">Remove Point</button>
+<div [chart]="chart"></div>
