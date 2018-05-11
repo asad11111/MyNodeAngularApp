@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { PusherService } from '../pusher.service';
 import { Chart } from 'angular-highcharts';
 import {EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface Message {
   text: string;
@@ -22,9 +24,36 @@ export class MessagesComponent implements OnInit {
 
   public user:any={};
   public text:any={};
-  constructor(private pusherService: PusherService,private el: ElementRef) {
+  constructor(private pusherService: PusherService,private el: ElementRef,private httpService: HttpClient) {
     this.messages = [];
   }
+
+//Dynamic Pie chart
+  pieChartOptions = {
+    responsive: true
+}
+
+pieChartLabels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+
+pieChartColor:any = [
+  {
+      backgroundColor: ['rgba(30, 169, 224, 0.8)',
+      'rgba(255,165,0,0.9)',
+      'rgba(139, 136, 136, 0.9)',
+      'rgba(255, 161, 181, 0.9)',
+      'rgba(255, 102, 0, 0.9)'
+      ]
+  }
+]
+
+pieChartData:any = [
+  { 
+      data: []
+  }
+];
+
+
+
  
  
   addSerie() {
@@ -86,15 +115,25 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+    this.httpService.get('./assets/sales.json', {responseType: 'json'}).subscribe(
+      data => {
+          this.pieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
+      },
+      (err: HttpErrorResponse) => {
+          console.log (err.message);
+      }
+  );
     this.pusherService.messagesChannel.bind('client-new-message', (message) => {
       this.messages.push(message);
     });
   }
 
 
+  onChartClick(event) {
+    console.log(event);
+}
 
-
-
+//pie chart end
 
 
 

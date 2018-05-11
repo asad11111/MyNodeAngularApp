@@ -75,6 +75,7 @@ const rootRouterConfig: Routes = [
     BrowserAnimationsModule,
     ShellModule, 
     SharedModule,
+   
     RouterModule.forRoot(rootRouterConfig),
   
 
