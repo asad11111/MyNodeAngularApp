@@ -16,9 +16,7 @@
   <p>My Charts</p>
 </a>
 
-<a [routerLink]="['/','high']" >
-  <p>High Charts</p>
-</a>
+
 
 <div class="container">
     <div style="text-align:center">
@@ -47,6 +45,11 @@
             <h3>
               <div #gmap style="width:100%;height:300px"></div>
             </h3>
+            <office-map  [mapCircle]="map_circle" [latLng]="defaultMap" placeSearch="googlemapaddress" (onSelect)="googleLat($event)"></office-map>
+            <li class="margin-bottom-10">
+                <div class="place-hd"> Street Address</div>
+                <input type="text"  #googlemapaddress name="googlemapaddress" id="googlemapaddress" placeholder="Address">
+            </li>
           </div>
         </div>
       </div>

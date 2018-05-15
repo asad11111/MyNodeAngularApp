@@ -7,7 +7,7 @@ import {Ng2PaginationModule} from 'ng2-pagination'; //importing ng2-pagination
 import { NguiPopupModule } from '@ngui/popup';
 import {SharedModule} from './shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
-
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +26,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { ChartsComponent } from './charts/charts.component';
 import {ChartsModule} from 'ng2-Charts';
 import { ChartModule } from 'angular-highcharts';
-
+import {googleMaps} from "./map";
+import {MapsResolver} from "./google-maps-resolver";
 
 
 
@@ -34,7 +35,7 @@ declare let require:any;
 
 
 const rootRouterConfig: Routes = [
-  {path: '', component: FirstComponent}, 
+  {path: '', component: FirstComponent,resolve: {maps: MapsResolver}}, 
    
   { path: '', data:{title: 'Home'}, component: Shell  ,children:[      
     {path: 'notification', loadChildren: './notifications/notifications.module#NotificationsModule'}, 
@@ -59,7 +60,8 @@ const rootRouterConfig: Routes = [
     FirstComponent,
     SecondComponent,
     MessagesComponent,
-    ChartsComponent
+    ChartsComponent,
+    googleMaps
   ],
   
   imports: [
@@ -89,7 +91,7 @@ const rootRouterConfig: Routes = [
  
   ],
 
-  providers: [   PusherService
+  providers: [   PusherService,{provide: LocationStrategy, useClass: HashLocationStrategy},MapsResolver,
    ],
   
   bootstrap: [AppComponent]

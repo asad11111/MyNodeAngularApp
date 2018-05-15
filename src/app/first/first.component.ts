@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild,ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild,ViewContainerRef,ElementRef } from '@angular/core';
 import { } from '@types/googlemaps';
+import { googleMaps } from "../map";
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
@@ -8,12 +9,15 @@ import { } from '@types/googlemaps';
 export class FirstComponent implements OnInit {
 
   @ViewChild('gmap') gmapElement: any;
+  @ViewChild('googlemapaddress') public input: ElementRef;
   map: google.maps.Map;
-
+  public defaultMap: any = { lat: -41.282966, lng: 174.773254 };
   isTracking = false;
   public circle;
+  public map_circle:any=true;
   currentLat: any;
   currentLong: any;
+  public job:any={};
 
   marker: google.maps.Marker;
   constructor() {
@@ -28,6 +32,11 @@ export class FirstComponent implements OnInit {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
+
+  googleLat(el) {
+    this.job.google_lat = el.lat();
+    this.job.google_long = el.lng();
+}
 
 
   findMe() {
