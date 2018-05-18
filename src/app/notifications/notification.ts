@@ -5,7 +5,7 @@ import { NguiMessagePopupComponent } from '@ngui/popup';
 import { NguiPopupComponent } from "@ngui/popup";
 import * as $ from 'jquery';
 
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 import { } from '@types/googlemaps';
 
@@ -21,7 +21,7 @@ export class Notification {
 
    
    
-    constructor(protected http: Http) {
+    constructor(protected http: Http,private spinnerService: Ng4LoadingSpinnerService) {
   
     }
   
@@ -34,9 +34,14 @@ export class Notification {
             $( this ).parent( 'li' ).addClass( 'active' );
         });
 
-
+       
      
   
+    }
+
+    ngAfterViewInit()
+    {
+      this.spinnerService.hide();
     }
   
  
@@ -68,13 +73,14 @@ export class Notification {
       }
       this.task=this.rating;
       this.http.post(`tasks`, data).subscribe((res) => {
+        this.spinnerService.show();
         this.task = "";
         this.rating=0;
         this.data = res.json();
         this.show=0;
         this.b = true;
         
-        
+       // this.spinnerService.hide();
         console.log(this.data);
       }, (re) => { });
   

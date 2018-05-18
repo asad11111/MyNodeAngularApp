@@ -30,9 +30,10 @@
     </div>
     <div>
       <div>
-        <button [disabled]="isTracking" class="btn btn-primary" (click)="findMe()">Find me</button>
+        <button  [disabled]="isTracking" class="btn btn-primary" (click)="findMe()">Find me</button>
         <button class="btn btn-primary" (click)="trackMe()">Track me</button>
         <button class="btn btn-primary" (click)="placeCircle()">Place Circle</button>
+        <button class="btn btn-primary" (click)="routeToNotifications()">Go to Notifications</button>
       </div>
       <div >
         <span>Longitude: {{currentLong}}</span>
@@ -46,10 +47,11 @@
               <div #gmap style="width:100%;height:300px"></div>
             </h3>
             <office-map  [mapCircle]="map_circle" [latLng]="defaultMap" placeSearch="googlemapaddress" (onSelect)="googleLat($event)"></office-map>
-            <li class="margin-bottom-10">
-                <div class="place-hd"> Street Address</div>
-                <input type="text"  #googlemapaddress name="googlemapaddress" id="googlemapaddress" placeholder="Address">
-            </li>
+            <ol >
+                <div class="col-sm-8 col-form-label">
+                <input type="text" class="form-control"  #googlemapaddress name="googlemapaddress" id="googlemapaddress" placeholder="Address">
+              </div>
+            </ol>
           </div>
         </div>
       </div>

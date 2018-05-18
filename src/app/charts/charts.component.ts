@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from  '@angular/common/http';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { PusherService } from '../pusher.service';
 @Component({
   selector: 'app-charts',
@@ -10,7 +10,7 @@ import { PusherService } from '../pusher.service';
 
 export class ChartsComponent implements OnInit {
 
-  constructor(private pusher: PusherService, private http: HttpClient) {}
+  constructor(private pusher: PusherService, private http: HttpClient, private spinnerService: Ng4LoadingSpinnerService) {}
   event = 'vote';
   vote = '';
   voted = false;
@@ -60,12 +60,15 @@ export class ChartsComponent implements OnInit {
   };
 
   castVote(player) {
+    this.spinnerService.show();
     this.http
       .post(`vote`, { player })
       .subscribe((res: any) => {
+       
         this.vote = res.player;
         this.voted = true;
       });
+      this.spinnerService.hide();
   }
   pieChartColors =
   [
@@ -82,10 +85,15 @@ export class ChartsComponent implements OnInit {
   ];
 
   getVoteClasses(player) {
+    
+
     return {
       elect: this.voted && this.vote === player,
       lost: this.voted && this.vote !== player,
+      
     };
+ 
+    
   }
   chartLabels: string[] = Object.keys(this.voteCount);
   chartData: number[] = Object.values(this.voteCount);

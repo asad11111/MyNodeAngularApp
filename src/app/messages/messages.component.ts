@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface Message {
-  text: string;
+   text:String;
   user: string;
 }
 
@@ -22,8 +22,8 @@ export class MessagesComponent implements OnInit {
   messages: Array<Message>;
   chart: Chart;
 
-  public user:any={};
-  public text:any={};
+  public user:String="";
+  public text:String="";
   constructor(private pusherService: PusherService,private el: ElementRef,private httpService: HttpClient) {
     this.messages = [];
   }
@@ -144,6 +144,8 @@ pieChartData:any = [
     }
     this.pusherService.messagesChannel.trigger('client-new-message', message);
     this.messages.push(message);
+    this.user="";
+    this.text="";
   }
 
 }

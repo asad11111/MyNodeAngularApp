@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild,ViewContainerRef,ElementRef } from '@angular/core';
+import {Router} from "@angular/router";
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { } from '@types/googlemaps';
 import { googleMaps } from "../map";
 @Component({
@@ -20,7 +22,7 @@ export class FirstComponent implements OnInit {
   public job:any={};
 
   marker: google.maps.Marker;
-  constructor() {
+  constructor(private spinnerService: Ng4LoadingSpinnerService, private router:Router) {
     
  }
 
@@ -40,13 +42,14 @@ export class FirstComponent implements OnInit {
 
 
   findMe() {
+    this.spinnerService.show();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);
 
         this.placeCircle() ;
         
-       
+      // this.spinnerService.hide();
 
       });
       
@@ -72,6 +75,11 @@ export class FirstComponent implements OnInit {
 
 }
 
+routeToNotifications()
+{
+  this.spinnerService.show();
+  this.router.navigate(['/','notification']);
+}
   showPosition(position) {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;

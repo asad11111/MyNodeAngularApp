@@ -20,7 +20,6 @@ import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 
 
-
 import {ShellModule, Shell} from './shell/shell.module';
 import { MessagesComponent } from './messages/messages.component';
 import { ChartsComponent } from './charts/charts.component';
@@ -28,7 +27,7 @@ import {ChartsModule} from 'ng2-Charts';
 import { ChartModule } from 'angular-highcharts';
 import {googleMaps} from "./map";
 import {MapsResolver} from "./google-maps-resolver";
-
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 declare let require:any;
@@ -48,6 +47,7 @@ const rootRouterConfig: Routes = [
       component: ChartsComponent,
     }
      
+
   ] },
 ];
 
@@ -71,20 +71,19 @@ const rootRouterConfig: Routes = [
     ChartModule,
     NguiPopupModule,
     Ng2PaginationModule,
+    Ng4LoadingSpinnerModule.forRoot() ,
     DataTableModule,
+  
     HttpClientModule,
-    BrowserModule,
+   
     BrowserAnimationsModule,
+  
     ShellModule, 
     SharedModule,
+  
    
     RouterModule.forRoot(rootRouterConfig),
-  
-
-   
-
-    SharedModule,
-    
+ 
   
 
    
@@ -93,7 +92,10 @@ const rootRouterConfig: Routes = [
 
   providers: [   PusherService,{provide: LocationStrategy, useClass: HashLocationStrategy},MapsResolver,
    ],
+
+
+  bootstrap: [AppComponent],
+ 
   
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

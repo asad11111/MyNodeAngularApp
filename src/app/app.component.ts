@@ -1,10 +1,10 @@
 import { Component, Output, ElementRef, EventEmitter, Input, ViewChild } from '@angular/core';
+
 import { Http, Response, RequestOptions } from '@angular/http';
 import { NguiMessagePopupComponent } from '@ngui/popup';
 import { NguiPopupComponent } from "@ngui/popup";
 
-
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 
@@ -17,11 +17,12 @@ import { NguiPopupComponent } from "@ngui/popup";
 
 export class AppComponent {
   title = 'app';
+ 
 
   @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
 
-
-  constructor(protected http: Http) {
+  
+  constructor(protected http: Http,private spinnerService: Ng4LoadingSpinnerService) {
 
   }
 
@@ -33,7 +34,7 @@ export class AppComponent {
 
  
 
-
+  template: string =`<img class="center" src="http://pa1.narvii.com/5722/2c617cd9674417d272084884b61e4bb7dd5f0b15_hq.gif" />`
 
   message: string;
 
