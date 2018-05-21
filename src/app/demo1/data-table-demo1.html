@@ -21,7 +21,7 @@
             [header]="'Date'"
             [sortable]="true">
             <ng-template #dataTableCell let-item="item">
-                <span>{{ data.name  }}</span>
+                <span>{{ item.date | date:'yyyy-MM-dd' }}</span>
             </ng-template>
         </data-table-column>
         <data-table-column
