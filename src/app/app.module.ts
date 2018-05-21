@@ -8,14 +8,12 @@ import { NguiPopupModule } from '@ngui/popup';
 import {SharedModule} from './shared/shared.module';
 import {HttpClientModule} from '@angular/common/http';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-
-
+import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PusherService } from './pusher.service';
 
 import { AppComponent } from './app.component';
 
-import {DataTableModule} from "angular2-datatable";
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 
@@ -28,8 +26,8 @@ import { ChartModule } from 'angular-highcharts';
 import {googleMaps} from "./map";
 import {MapsResolver} from "./google-maps-resolver";
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-
-
+import { DataTableModule } from 'angular5-data-table';
+import { DataTableDemo1Component } from './demo1/data-table-demo1';
 declare let require:any;
 
 
@@ -45,9 +43,14 @@ const rootRouterConfig: Routes = [
     {
       path: 'charts',
       component: ChartsComponent,
-    }
-     
+    },
 
+    {
+    path: 'demo1',
+    component: DataTableDemo1Component,
+    
+     
+    }
   ] },
 ];
 
@@ -61,19 +64,24 @@ const rootRouterConfig: Routes = [
     SecondComponent,
     MessagesComponent,
     ChartsComponent,
+    DataTableDemo1Component,
     googleMaps
   ],
   
   imports: [
+    CommonModule,
     BrowserModule,
     HttpModule,
     ChartsModule,
     ChartModule,
     NguiPopupModule,
-    Ng2PaginationModule,
-    Ng4LoadingSpinnerModule.forRoot() ,
     DataTableModule,
+    Ng2PaginationModule,
+ 
+    Ng4LoadingSpinnerModule.forRoot() ,
+   
   
+    FormsModule,
     HttpClientModule,
    
     BrowserAnimationsModule,
@@ -89,6 +97,7 @@ const rootRouterConfig: Routes = [
    
  
   ],
+
 
   providers: [   PusherService,{provide: LocationStrategy, useClass: HashLocationStrategy},MapsResolver,
    ],

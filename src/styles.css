@@ -69,6 +69,7 @@ h1 {
   
   /* Navigation link styles */
   nav a {
+    
     padding: 5px 10px;
     text-decoration: none;
     margin-top: 10px;
@@ -273,6 +274,7 @@ Colour for hovered stars when decreasing the rating
 
 
   ul {
+  
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -281,10 +283,12 @@ Colour for hovered stars when decreasing the rating
   }
   
   li {
+    
     float: left;
   }
   
   li a {
+    
     display: block;
     color: white;
     text-align: center;
@@ -295,3 +299,15 @@ Colour for hovered stars when decreasing the rating
   li a:hover {
     background-color: #111;
   }
+
+
+  .footer {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}

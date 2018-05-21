@@ -5,6 +5,9 @@ import { NguiMessagePopupComponent } from '@ngui/popup';
 import { NguiPopupComponent } from "@ngui/popup";
 
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+
+
 
 
 
@@ -17,20 +20,26 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 export class AppComponent {
   title = 'app';
- 
+  
+  
 
+  
   @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
+  ngOnInit() {
 
+  }
   
   constructor(protected http: Http,private spinnerService: Ng4LoadingSpinnerService) {
 
   }
+ 
+ 
 
-
-
-  ngOnInit() {
   
-  }
+ 
+
+
+  
 
  
 
@@ -247,7 +256,6 @@ checkCheked(t) {
 
 
 }
-
 
 
 

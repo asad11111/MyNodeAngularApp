@@ -3,6 +3,9 @@ import {Router} from "@angular/router";
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { } from '@types/googlemaps';
 import { googleMaps } from "../map";
+
+
+
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
@@ -10,6 +13,7 @@ import { googleMaps } from "../map";
 })
 export class FirstComponent implements OnInit {
 
+  
   @ViewChild('gmap') gmapElement: any;
   @ViewChild('googlemapaddress') public input: ElementRef;
   map: google.maps.Map;
@@ -34,6 +38,8 @@ export class FirstComponent implements OnInit {
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }
+
+  
 
   googleLat(el) {
     this.job.google_lat = el.lat();
