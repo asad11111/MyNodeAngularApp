@@ -1,10 +1,8 @@
 
+
 export default [
   
-    {
-      'name': 'Aaron 2Moore', 'email': 'Heath44@hotmail.com', 'jobTitle': 'Regional Configuration Producer',
-      'active': true, 'phoneNumber': '611-898-6201', 'date': '2015-11-06T07:21:25.510Z'
-    },
+ 
     {
       'name': 'Yvonne Conroy Mrs.', 'email': 'Gideon9@yahoo.com', 'jobTitle': 'Global Mobility Orchestrator',
       'active': false, 'phoneNumber': '115-850-0969', 'date': '2014-12-20T00:48:40.276Z'

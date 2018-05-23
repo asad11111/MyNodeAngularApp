@@ -1,5 +1,5 @@
 
-import { Component, Output, ElementRef, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, Output, ElementRef, EventEmitter, Input, ViewChild, Injectable } from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
 import { NguiMessagePopupComponent } from '@ngui/popup';
 import { NguiPopupComponent } from "@ngui/popup";
@@ -16,12 +16,14 @@ import { } from '@types/googlemaps';
 
 
 })
+@Injectable()
 export class Notification {
     @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
 
    
    
     constructor(protected http: Http,private spinnerService: Ng4LoadingSpinnerService) {
+      this.showTasks();
   
     }
   
@@ -65,6 +67,7 @@ export class Notification {
   
     
     public submit() {
+      this.spinnerService.show();
       this.b = false;
       let data={
          name: this.task.name,
@@ -73,13 +76,13 @@ export class Notification {
       }
       this.task=this.rating;
       this.http.post(`tasks`, data).subscribe((res) => {
-        this.spinnerService.show();
+      
         this.task = "";
         this.rating=0;
         this.data = res.json();
         this.show=0;
         this.b = true;
-        
+        this.spinnerService.hide();
        // this.spinnerService.hide();
         console.log(this.data);
       }, (re) => { });
@@ -164,7 +167,7 @@ export class Notification {
         this.b = true;
         this.show=1;
         console.log(this.tasks);
-  
+        return this.tasks;
       }, (res) => { });
     }
   
