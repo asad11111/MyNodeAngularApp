@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
 import { PusherService } from '../pusher.service';
 import { Chart } from 'angular-highcharts';
 import {EventEmitter, Input, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface Message {
@@ -70,7 +70,10 @@ pieChartData:any = [
         Math.floor(Math.random() * 10),
         Math.floor(Math.random() * 10)
       ]
+     
     });
+   
+    
   }
 
   removePoint() {

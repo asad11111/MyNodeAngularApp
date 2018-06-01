@@ -3,7 +3,9 @@ import {Router} from "@angular/router";
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { } from '@types/googlemaps';
 import { googleMaps } from "../map";
-
+import { User } from '../_models/index';
+import { UserService } from '../_services/index';
+import {DataserviceService} from '../_services/dataservice.service'
 
 
 @Component({
@@ -12,6 +14,7 @@ import { googleMaps } from "../map";
   styleUrls: ['./first.component.css']
 })
 export class FirstComponent implements OnInit {
+
 
   
   @ViewChild('gmap') gmapElement: any;
@@ -24,22 +27,51 @@ export class FirstComponent implements OnInit {
   currentLat: any;
   currentLong: any;
   public job:any={};
+  currentUser: User;
+  users: User[] = [];
+  tasks:any=[];
 
   marker: google.maps.Marker;
-  constructor(private spinnerService: Ng4LoadingSpinnerService, private router:Router) {
-    
+  constructor(private spinnerService: Ng4LoadingSpinnerService, private router:Router,private userService: UserService, private mydata:DataserviceService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
  }
 
   ngOnInit() {
+   
+   this.showTasks();
+   this.loadAllUsers();
     var mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+  
   }
 
-  
+
+ 
+
+showTasks()
+{
+  this.tasks= this.mydata.showTasks() .subscribe((response) => {
+    this.tasks=response;
+    console.log(this.tasks, "On page load");
+    
+   }, (response) => { err => console.log(err)} );
+ 
+}
+
+
+deleteUser(_id: string) {
+    this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
+}
+
+private loadAllUsers() {
+    this.userService.getAll().subscribe(users => { this.users = users; });
+   // console.log(this.users);
+}
+
 
   googleLat(el) {
     this.job.google_lat = el.lat();
@@ -53,9 +85,10 @@ export class FirstComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);
 
-        this.placeCircle() ;
+       // this.placeCircle() ;
+        this.isTracking=false;
         
-      // this.spinnerService.hide();
+       this.spinnerService.hide();
 
       });
       
@@ -97,7 +130,7 @@ routeToNotifications()
       this.marker = new google.maps.Marker({
         position: location,
         map: this.map,
-        title: 'Got you!'
+        title: 'You are here!'
       });
     }
     else {
@@ -115,6 +148,8 @@ routeToNotifications()
       alert("Geolocation is not supported by this browser.");
     }
   }
+
+
 
   showTrackingPosition(position) {
     console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);

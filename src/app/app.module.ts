@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import {Ng2PaginationModule} from 'ng2-pagination'; //importing ng2-pagination
 import { NguiPopupModule } from '@ngui/popup';
 import {SharedModule} from './shared/shared.module';
-import {HttpClientModule} from '@angular/common/http';
+
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,26 +28,41 @@ import {MapsResolver} from "./google-maps-resolver";
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { DataTableModule } from 'angular5-data-table';
 import { DataTableDemo1Component } from './demo1/data-table-demo1';
+import { AlertComponent } from './_directives/index';
+import { AuthGuard } from './_guards/index';
+import { JwtInterceptorProvider, ErrorInterceptorProvider } from './_helpers/index';
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './login/index';
+import { RegisterComponent } from './register/index';
+import {DataserviceService} from './_services/dataservice.service'
+ 
 declare let require:any;
 
 
 const rootRouterConfig: Routes = [
-  {path: '', component: FirstComponent,resolve: {maps: MapsResolver}}, 
+  {path: '', component: FirstComponent, canActivate: [AuthGuard],   resolve: {maps: MapsResolver}}, 
+  { path: 'login',  component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
    
-  { path: '', data:{title: 'Home'}, component: Shell  ,children:[      
-    {path: 'notification', loadChildren: './notifications/notifications.module#NotificationsModule'}, 
+  { path: '', data:{title: 'Home'}, component: Shell, canActivate: [AuthGuard],    children:[      
+    {path: 'notification',   loadChildren: './notifications/notifications.module#NotificationsModule'}, 
+    
     {
-      path: 'messages',
+      path: 'messages',  
       component: MessagesComponent,
+      
     },
     {
       path: 'charts',
       component: ChartsComponent,
+      
     },
 
     {
     path: 'demo1',
     component: DataTableDemo1Component,
+    
     
      
     }
@@ -65,6 +80,11 @@ const rootRouterConfig: Routes = [
     MessagesComponent,
     ChartsComponent,
     DataTableDemo1Component,
+    AlertComponent,
+   
+
+    LoginComponent,
+    RegisterComponent,
     googleMaps
   ],
   
@@ -77,6 +97,7 @@ const rootRouterConfig: Routes = [
     NguiPopupModule,
     DataTableModule,
     Ng2PaginationModule,
+    
  
     Ng4LoadingSpinnerModule.forRoot() ,
    
@@ -99,12 +120,19 @@ const rootRouterConfig: Routes = [
   ],
 
 
-  providers: [   PusherService,{provide: LocationStrategy, useClass: HashLocationStrategy},MapsResolver,
-   ],
+  providers: [ 
+    PusherService,{provide: LocationStrategy, useClass: HashLocationStrategy},MapsResolver,AuthGuard,
+    AlertService,
+    DataserviceService,
+    AuthenticationService,
+    UserService,
+    JwtInterceptorProvider,
+    ErrorInterceptorProvider   ],
 
 
   bootstrap: [AppComponent],
  
   
 })
+
 export class AppModule { }

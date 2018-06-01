@@ -1,102 +1,157 @@
-<button style="display: none;" type="submit" (click)="showTasks()" class="btn btn-primary">Show Tasks</button>
+<button
+    style="display: none;"
+    type="submit"
+    (click)="showTasks()"
+    class="btn btn-primary"
+>
+    Show Tasks
+</button>
+
+
+
 <div  *ngIf="show==1">
 
-   
-      
-        <div>
-    <data-table
-    [title]="'Employees'"
-    [items]="items"
-    [itemCount]="itemCount"
-    [pageLimits]="limits"
-    (reload)="reloadItems($event)"
-    (rowClick)="rowClick($event)"
-    (rowDoubleClick)="rowDoubleClick($event)"
-    [rowTooltip]="rowTooltip" >
-        <data-table-column
-            [property]="'name'"
-            [header]="'Name'"
-           
-            [sortable]="true">
-          
-           
-        </data-table-column>
-        
-
-        <data-table-column
-        [property]="'player'"
-        [header]="'Player'"
-        [visible]="false"
-        [sortable]="true">
-        <ng-template #dataTableCell let-item="item">
-                <span>{{ item.player }}</span>
-            </ng-template>
-    </data-table-column>
-
-    <data-table-column
-    [property]="'Ratings'"
-    [header]="'Ratings'"
-    [visible]="true">
-    <ng-template #dataTableCell let-item="item">
-            <span >   <div style=" margin: -30px 0px 0px 200px;" class="name-detailss-name"> <rating onlyview="true" [rating]="item.Ratings"  (onChange)="ratings($event)"></rating> </div></span>
-        </ng-template>
-  
-    
-    
-</data-table-column>
-        
-    
-        <data-table-column
-            [property]="'Created_Date'"
-            [header]="'Date'"
-           
-            [sortable]="true">
-            <ng-template #dataTableCell let-item="item">
-                <span>{{ item.Created_Date | date:'yyyy-MM-dd' }}</span>
-            </ng-template>
-        </data-table-column>
-
-        <data-table-column
-        [property]="'_id'"
-        [header]="'Action'"
+    <div>
        
+        <data-table
+       
+            [title]="'Employees'"
+            [items]="items"
+            [itemCount]="itemCount"
+            [pageLimits]="limits"
+            (reload)="reloadItems($event)"
+            (rowClick)="rowClick($event)"
+            (rowDoubleClick)="rowDoubleClick($event)"
+            [rowTooltip]="rowTooltip"
         >
-        <ng-template #dataTableCell let-item="item">
-            <span>  <button class="btn btn-danger" (click)="delTask(item._id)" icon="fa fa-delete">
-                    Delete
-                  </button></span>
-        </ng-template>
-    </data-table-column>
-        <data-table-column
-            property="phoneNumber"
-            header="Phone number"
-            width="150px"
-            [visible]="false">
-        </data-table-column>
-        <data-table-column
-            [property]="'jobTitle'"
-            [header]="'Job title'"
-            [visible]="false">
-        </data-table-column>
-        <data-table-column
-            [property]="'active'"
-            [header]="'Active'"
-            [width]="100"
-            [resizable]="true">
-            <ng-template #dataTableHeader let-item="item">
-                <span style="color: rgb(232, 0, 0)">Active</span>
-            </ng-template>
-            <ng-template #dataTableCell let-item="item">
-                <span style="color: grey">
-                <span class="fa fa-check"  *ngIf="item.active">  </span>
-                
-                <span class="fa fa-times" *ngIf="!item.active"> </span>
-                </span>
-            </ng-template>
-        </data-table-column>
-    </data-table>
-    <ngui-popup #popup></ngui-popup>
-</div>
- </div>
+            <data-table-column
+                [property]="'name'"
+                [header]="'Name'"
+                [sortable]="true"
+            >
 
- 
+            </data-table-column>
+
+            <data-table-column
+                [property]="'player'"
+                [header]="'Player'"
+                [visible]="false"
+                [sortable]="true"
+            >
+                <ng-template
+                    #dataTableCell
+                    let-item="item"
+                >
+                    <span>{{ item.player }}</span>
+                </ng-template>
+            </data-table-column>
+
+            <data-table-column
+                [property]="'Ratings'"
+                [header]="'Ratings'"
+                [visible]="true"
+            >
+                <ng-template
+                    #dataTableCell
+                    let-item="item"
+                >
+                    <span>
+                           <rating  style="margin: -47px 0px 0px -20px; clear: both;  position: absolute "
+                            class="name-detailss-name"
+                                onlyview="true"
+                                [rating]="item.Ratings"
+                                (onChange)="ratings($event)"
+                            ></rating>
+                       
+                    </span>
+                </ng-template>
+
+            </data-table-column>
+
+            <data-table-column
+                [property]="'Created_Date'"
+                [header]="'Date'"
+                [sortable]="true"
+            >
+                <ng-template
+                    #dataTableCell
+                    let-item="item"
+                >
+                    <span>
+                        {{ item.Created_Date | date:'yyyy-MM-dd' }}
+                    </span>
+                </ng-template>
+            </data-table-column>
+
+            <data-table-column
+                [property]="'_id'"
+                [header]="'Action'"
+            >
+                <ng-template
+                    #dataTableCell
+                    let-item="item"
+                >
+                    <span>
+                        <button
+                            class="btn btn-danger"
+                            (click)="delTask(item._id)"
+                            icon="fa fa-delete"
+                        >
+                            Delete
+                        </button>
+                    </span>
+                </ng-template>
+            </data-table-column>
+            <data-table-column
+                property="phoneNumber"
+                header="Phone number"
+                width="150px"
+                [visible]="false"
+            >
+            </data-table-column>
+            <data-table-column
+                [property]="'jobTitle'"
+                [header]="'Job title'"
+                [visible]="false"
+            >
+            </data-table-column>
+            <data-table-column
+                [property]="'active'"
+                [header]="'Active'"
+                [width]="100"
+                [resizable]="true"
+            >
+                <ng-template
+                    #dataTableHeader
+                    let-item="item"
+                >
+                    <span style="color: rgb(232, 0, 0)">Active</span>
+                </ng-template>
+                <ng-template
+                    #dataTableCell
+                    let-item="item"
+                >
+                    <span style="color: grey">
+                        <span
+                            class="fa fa-check"
+                            *ngIf="item.active"
+                        >
+                        </span>
+
+                        <span
+                            class="fa fa-times"
+                            *ngIf="!item.active"
+                        >
+                        </span>
+                    </span>
+                </ng-template>
+            </data-table-column>
+        </data-table>
+        <ngui-popup #popup></ngui-popup>
+    </div>
+</div>
+
+
+
+
+

@@ -154,9 +154,15 @@ Colour for hovered stars when decreasing the rating
             text-align:left !important;
         }
 
-
-
        
+
+        a {
+          cursor: pointer;
+      }
+      
+      .help-block {
+          font-size: 12px;
+      }
 
   .table td, .table th {
       text-align: center;
@@ -255,6 +261,8 @@ Colour for hovered stars when decreasing the rating
     padding: 10px;
   }
 
+
+  
   .form-grid {
     padding:0;}
 

@@ -17,14 +17,32 @@
 </a>
 
 <a [routerLink]="['/','demo1']" >
-  <p>demo1</p>
+  <p>Data Table</p>
 </a>
 
+<div class="col-md-6 col-md-offset-3">
+    <h1>Hi {{currentUser.firstName}}!</h1>
+    <p>You're logged in </p>
+    <h3>All registered users:</h3>
+    <ul style="background-color: honeydew">
+        <li *ngFor="let user of users">
+            {{user.username}} ({{user.firstName}} {{user.lastName}})
+            - <a (click)="deleteUser(user._id)">Delete</a>
+        </li>
+    </ul>
+    <p><a [routerLink]="['/login']">Logout</a></p>
+</div>
 
+<div class="col-sm-5">
+
+    <button type="submit" (click)="showTasks()" class="btn btn-primary">Show Tasks</button>
+    <button type="submit" (click)=" loadAllUsers()" class="btn btn-primary">Show </button>
+   
+</div>
 
 <div class="container">
     
-   
+  
 
     <div style="text-align:center">
       <h1>
@@ -37,8 +55,11 @@
     </div>
     <div>
       <div>
-        <button  [disabled]="isTracking" class="btn btn-primary" (click)="findMe()">Find me</button>
+          
+        <button class="btn btn-primary" [disabled]="isTracking"   (click)="findMe()"> <i  (click)="findMe()" class="fa fa-location-arrow"></i>  </button> 
         <button class="btn btn-primary" (click)="trackMe()">Track me</button>
+        <button class="btn btn-primary" (click)="  ping()">  ping me</button>
+      
         <button class="btn btn-primary" (click)="placeCircle()">Place Circle</button>
         <button class="btn btn-primary" (click)="routeToNotifications()">Go to Notifications</button>
       </div>

@@ -2,13 +2,32 @@
 
   <div>
 
+      <div> Months :
+          <select (change) = "changemonths($event)">
+             <option *ngFor = "let i of months">{{i}}</option>
+          </select>
+       </div>
+       <br/>
+
+
+       <button (click) = "myClickFunction($event)">Click Me</button>
 
 
     <form>
       <div *ngIf="show==0" class="form-group row">
         <label class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-4">
-          <input type="text" name="task" class="form-control" [(ngModel)]="task.name" placeholder="Name">
+          <input type="text" name="task" class="form-control" [(ngModel)]="task.name"  placeholder="Name">
+        </div>
+
+       
+        <div class="col-sm-4">
+          <select name="task" [(ngModel)]="task.status" required #profile="ngModel" >
+            <option [ngValue]="null" disabled>Choose your profile</option>
+            <option *ngFor="let prf of statuses" [ngValue]="prf">
+              {{ prf }}
+            </option>
+         </select>
         </div>
 
         <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
@@ -19,7 +38,7 @@
         <label class="col-sm-2 col-form-label">Ratings</label>
         <div class="name-detailss-name">
           <div>
-            <rating [rating]="rating" (onChange)="ratings($event)"></rating>
+            <rating required [rating]="rating" (onChange)="ratings($event)"></rating>
           </div>
         </div>
       </div>

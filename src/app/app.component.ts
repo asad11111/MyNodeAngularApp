@@ -25,16 +25,15 @@ export class AppComponent {
 
   
   @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
-  ngOnInit() {
+  ngOnInit() { 
 
   }
   
-  constructor(protected http: Http,private spinnerService: Ng4LoadingSpinnerService) {
+  constructor(private spinnerService: Ng4LoadingSpinnerService,public http: Http) {
 
   }
  
- 
-
+  
   
  
 
@@ -45,171 +44,171 @@ export class AppComponent {
 
   template: string =`<img class="center" src="http://pa1.narvii.com/5722/2c617cd9674417d272084884b61e4bb7dd5f0b15_hq.gif" />`
 
-  message: string;
+//   message: string;
 
-  public task: any = {};
-  public tasks: any = [];
+//   public task: any = {};
+//   public tasks: any = [];
  
-  public updtask:any={};
-  public name:any={};
-  public data: any = {};
-  public show: number = 0;
-  public hide: number = 0;
-  public mapShowHide: number = 1;
-  public review: any = [];
-  public n:any=false;
+//   public updtask:any={};
+//   public name:any={};
+//   public data: any = {};
+//   public show: number = 0;
+//   public hide: number = 0;
+//   public mapShowHide: number = 1;
+//   public review: any = [];
+//   public n:any=false;
 
-  latitude:number;
-  longitude:number;
-  public rating: number=0; 
-  public b: any = false;
+//   latitude:number;
+//   longitude:number;
+//   public rating: number=0; 
+//   public b: any = false;
 
   
-  public submit() {
-    this.b = false;
-    let data={
-       name: this.task.name,
-       Ratings:this.rating
+//   // public submit() {
+//   //   this.b = false;
+//   //   let data={
+//   //      name: this.task.name,
+//   //      Ratings:this.rating
 
-    }
-    this.task=this.rating;
-    this.http.post(`tasks`, data).subscribe((res) => {
-      this.task = "";
-      this.rating=0;
-      this.data = res.json();
-      this.show=0;
-      this.b = true;
+//   //   }
+//   //   this.task=this.rating;
+//   //   this.http.post(`tasks`, data).subscribe((res) => {
+//   //     this.task = "";
+//   //     this.rating=0;
+//   //     this.data = res.json();
+//   //     this.show=0;
+//   //     this.b = true;
       
       
-      console.log(this.data);
-    }, (re) => { });
+//   //     console.log(this.data);
+//   //   }, (re) => { });
 
-  }
+//   // }
 
-  changeChecked(t, e) {
-    this.review[t] = e.checked;
-    return true;
-}
+//   changeChecked(t, e) {
+//     this.review[t] = e.checked;
+//     return true;
+// }
 
-checkCheked(t) {
-    if (this.review[t]) {
-        if (this.review[t] == true)
-        {
-            return this.n=true;
-        }
-    } else
-    {
-        return this.n=false;
-    }
-}
+// checkCheked(t) {
+//     if (this.review[t]) {
+//         if (this.review[t] == true)
+//         {
+//             return this.n=true;
+//         }
+//     } else
+//     {
+//         return this.n=false;
+//     }
+// }
 
-  ratings(r){
-    this.rating =r;  
-}
+//   ratings(r){
+//     this.rating =r;  
+// }
 
-  public updateTask(a, id) {
+//   public updateTask(a, id) {
 
-    if (a!=1)
-    return 0;
-    if (a == 1) {
-      this.show = 1;
-      this.updtask=id;
-     }
-  }
+//     if (a!=1)
+//     return 0;
+//     if (a == 1) {
+//       this.show = 1;
+//       this.updtask=id;
+//      }
+//   }
 
-  showHideMap(a)
-  {
-    if(a==1)
-    this.mapShowHide=0;
+//   showHideMap(a)
+//   {
+//     if(a==1)
+//     this.mapShowHide=0;
 
-    if(a!=1)
-    {
-      this.mapShowHide=1;
-    }
+//     if(a!=1)
+//     {
+//       this.mapShowHide=1;
+//     }
 
-    return 0;
+//     return 0;
 
-  }
+//   }
 
-  public hideTasks()
-  {
-    this.show=0;
-  }
+//   public hideTasks()
+//   {
+//     this.show=0;
+//   }
 
-  public taskupd(id,n)
-  {
-    this.updtask=id;
-    this.name=n;
-  console.log(this.updtask,this.name);
+//   public taskupd(id,n)
+//   {
+//     this.updtask=id;
+//     this.name=n;
+//   console.log(this.updtask,this.name);
 
 
-  let name={
+//   let name={
 
-    name:this.name
+//     name:this.name
 
-  }
-  this.http.put('tasks/'+this.updtask, name).subscribe((res) => {
-    this.show=0;
-  }, (res) => { }); 
+//   }
+//   this.http.put('tasks/'+this.updtask, name).subscribe((res) => {
+//     this.show=0;
+//   }, (res) => { }); 
 
    
-  }
+//   }
 
 
 
-  public showTasks() {
-    this.b = false;
-    this.http.get(`tasks`).subscribe((res) => {
-      this.tasks = res.json();
-      this.b = true;
-      this.show=1;
-      console.log(this.tasks);
+//   public showTasks() {
+//     this.b = false;
+//     this.http.get(`tasks`).subscribe((res) => {
+//       this.tasks = res.json();
+//       this.b = true;
+//       this.show=1;
+//       console.log(this.tasks);
 
-    }, (res) => { });
-  }
+//     }, (res) => { });
+//   }
 
-  public delTask(id) {
-    this.b = false;
-    {
-      this.popup.open(NguiMessagePopupComponent, {
-        title: 'My Title',
-        message: 'Are You Sure',
-        buttons: {
-          OK: () => {
-            this.message = "Ok button is pressed";
-            this.http.delete('tasks/' + id).subscribe((res) => {
-              this.showTasks();
-            }, (res) => { });
-            this.popup.close();
-          },
-          CANCEL: () => {
-            this.message = "Cancel button is pressed";
-            this.popup.close();
-          }
-        }
-      });
-    };
+//   public delTask(id) {
+//     this.b = false;
+//     {
+//       this.popup.open(NguiMessagePopupComponent, {
+//         title: 'My Title',
+//         message: 'Are You Sure',
+//         buttons: {
+//           OK: () => {
+//             this.message = "Ok button is pressed";
+//             this.http.delete('tasks/' + id).subscribe((res) => {
+//               this.showTasks();
+//             }, (res) => { });
+//             this.popup.close();
+//           },
+//           CANCEL: () => {
+//             this.message = "Cancel button is pressed";
+//             this.popup.close();
+//           }
+//         }
+//       });
+//     };
 
 
-  }
+//   }
 
-  openPopup() {
-    this.popup.open(NguiMessagePopupComponent, {
-      title: 'My Title',
-      message: 'My Message',
-      buttons: {
-        OK: () => {
-          this.message = "Ok button is pressed";
+//   openPopup() {
+//     this.popup.open(NguiMessagePopupComponent, {
+//       title: 'My Title',
+//       message: 'My Message',
+//       buttons: {
+//         OK: () => {
+//           this.message = "Ok button is pressed";
 
-          this.popup.close();
-        },
-        CANCEL: () => {
-          this.message = "Cancel button is pressed";
-          this.popup.close();
-        }
-      }
-    });
-  };
+//           this.popup.close();
+//         },
+//         CANCEL: () => {
+//           this.message = "Cancel button is pressed";
+//           this.popup.close();
+//         }
+//       }
+//     });
+//   };
 
 
 
