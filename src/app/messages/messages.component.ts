@@ -1,12 +1,12 @@
-import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PusherService } from '../pusher.service';
 import { Chart } from 'angular-highcharts';
-import {EventEmitter, Input, Output } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { person } from '../person';
 interface Message {
-   text:String;
+  text: String;
   user: string;
 }
 
@@ -21,41 +21,42 @@ export class MessagesComponent implements OnInit {
   @ViewChild('googlemapaddress') public input: ElementRef;
   messages: Array<Message>;
   chart: Chart;
-
-  public user:String="";
-  public text:String="";
-  constructor(private pusherService: PusherService,private el: ElementRef,private httpService: HttpClient) {
+  person;
+  public user: String = "";
+  public text: String = "";
+  constructor(private pusherService: PusherService, private el: ElementRef, private httpService: HttpClient) {
     this.messages = [];
+    this.person = person;
   }
 
-//Dynamic Pie chart
+  //Dynamic Pie chart
   pieChartOptions = {
     responsive: true
-}
+  }
 
-pieChartLabels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
+  pieChartLabels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY'];
 
-pieChartColor:any = [
-  {
+  pieChartColor: any = [
+    {
       backgroundColor: ['rgba(30, 169, 224, 0.8)',
-      'rgba(255,165,0,0.9)',
-      'rgba(139, 136, 136, 0.9)',
-      'rgba(255, 161, 181, 0.9)',
-      'rgba(255, 102, 0, 0.9)'
+        'rgba(255,165,0,0.9)',
+        'rgba(139, 136, 136, 0.9)',
+        'rgba(255, 161, 181, 0.9)',
+        'rgba(255, 102, 0, 0.9)'
       ]
-  }
-]
+    }
+  ]
 
-pieChartData:any = [
-  { 
+  pieChartData: any = [
+    {
       data: []
-  }
-];
+    }
+  ];
 
 
 
- 
- 
+
+
   addSerie() {
     this.chart.addSerie({
       name: 'Line ' + Math.floor(Math.random() * 10),
@@ -70,10 +71,10 @@ pieChartData:any = [
         Math.floor(Math.random() * 10),
         Math.floor(Math.random() * 10)
       ]
-     
+
     });
-   
-    
+
+
   }
 
   removePoint() {
@@ -95,7 +96,7 @@ pieChartData:any = [
       credits: {
         enabled: false
       },
-   
+
       series: [{
         name: 'Line 1',
         data: [1, 2, 3]
@@ -118,14 +119,14 @@ pieChartData:any = [
 
   ngOnInit() {
     this.init();
-    this.httpService.get('./assets/sales.json', {responseType: 'json'}).subscribe(
+    this.httpService.get('./assets/sales.json', { responseType: 'json' }).subscribe(
       data => {
-          this.pieChartData = data as any [];	 // FILL THE CHART ARRAY WITH DATA.
+        this.pieChartData = data as any[];	 // FILL THE CHART ARRAY WITH DATA.
       },
       (err: HttpErrorResponse) => {
-          console.log (err.message);
+        console.log(err.message);
       }
-  );
+    );
     this.pusherService.messagesChannel.bind('client-new-message', (message) => {
       this.messages.push(message);
     });
@@ -134,21 +135,21 @@ pieChartData:any = [
 
   onChartClick(event) {
     console.log(event);
-}
+  }
 
-//pie chart end
+  //pie chart end
 
 
 
   sendMessage(user: string, text: string) {
     const message: Message = {
-       user: user,
-       text: text,
+      user: user,
+      text: text,
     }
     this.pusherService.messagesChannel.trigger('client-new-message', message);
     this.messages.push(message);
-    this.user="";
-    this.text="";
+    this.user = "";
+    this.text = "";
   }
 
 }

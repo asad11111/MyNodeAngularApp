@@ -23,5 +23,11 @@ export class DataserviceService {
     .map((response:Response) => response);
  
   }
+
+  public showData() {
+    return this.http.get('data')
+    .map((response:Response) => response);
+ 
+  }
 }
 

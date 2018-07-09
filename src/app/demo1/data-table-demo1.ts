@@ -10,6 +10,9 @@ import { count } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import { FirstComponent } from '../first/first.component';
 import { HttpClient } from '@angular/common/http';
+import {DataserviceService} from '../_services/dataservice.service'
+import { AlertService, AuthenticationService } from '../_services/index';
+
 @Component({
   selector: 'app-data-table-demo-1',
   providers: [],
@@ -22,24 +25,17 @@ export class DataTableDemo1Component {
   public show: number = 0;
 
   message: string;
-
-  data_arr: any;
-  public data: any = [
-
-
-    
-  ];
-  public data1: any = {};
-  ngOnInit() {
-
-    this.showTasks();
-    console.log(this.data1,"data1");
-
-
-
-  }
+  
+  public data1: any = [];
   public defaultMap: any = { lat: -41.282966, lng: 174.773254 };
+  //itemResource = new DataTableResource(this.data1);
   itemResource = new DataTableResource(this.data1);
+  ngOnInit() {
+    this.showTasks();
+   // console.log(this.data1,"data1");
+   
+  }
+ 
 
   items = [];
   itemCount = 0;
@@ -47,13 +43,13 @@ export class DataTableDemo1Component {
   public job: any = {};
 
   public map_circle: any = true;
-  constructor(protected http: HttpClient, private router:Router) {
+  constructor(protected http: HttpClient, private router:Router,private mydata:DataserviceService,private alertService: AlertService) {
     this.itemResource.count().then(count => this.itemCount = count);
-    console.log(this.data1,"data1");
+  //  console.log(this.data1,"data1");
 
   }
   ngAfterViewInit() {
-console.log(this.data1,"data1");
+//console.log(this.data1,"data1");
   }
 
 
@@ -88,28 +84,24 @@ console.log(this.data1,"data1");
 
   }
 
+public err:any={};
 
 
+  showTasks()
+{
+ 
+  return this.data1= this.mydata.showTasks() .subscribe((response) => {
+    this.data1=response;
+    this.show = 1;
+    this.itemResource = new DataTableResource(this.data1);
+    this.itemResource.count().then(count => this.itemCount = count);
+    console.log(this.data1, "On page load");
+    
+   }, (response) => { err => console.log(err)} );
+ 
+}
 
 
-  public showTasks() {
-
-    return this.http.get(`tasks`).subscribe((res) => {
-      this.data1 = res;
-
-      this.itemResource = new DataTableResource(this.data1);
-      this.itemResource.count().then(count => this.itemCount = count);
-      this.show = 1;
-      
-      console.log(this.data1, "data");
-      this.router.navigate(['/','demo1']);
-      
-
-
-    }, (res) => { });
-
-
-  }
 
 
 

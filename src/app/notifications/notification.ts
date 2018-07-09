@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import { AlertService, AuthenticationService } from '../_services/index';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-
+import { User } from '../_models/index';
 
 import 'rxjs/add/operator/map';
 import { } from '@types/googlemaps';
@@ -22,11 +22,34 @@ import { } from '@types/googlemaps';
 })
 @Injectable()
 export class Notification {
+
+  message: string;
+
+  public task: any = {};
+  public tasks: any = [];
+  public show: number = 0;
+  public updtask: any = {};
+  public name: any = {};
+  public data: any = {};
+  public hide: number = 0;
+  public hidden: any = [];
+  public mapShowHide: number = 1;
+  public review: any = [];
+  public n: any = false;
+  public rating: number = 0;
+  public b: any = false;
+  users: User[] = [];
+  currentUser: User;
+
+  public err: any = {};
   @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
 
 
-  constructor(protected http: HttpClient, private spinnerService: Ng4LoadingSpinnerService,private alertService: AlertService ) {
+  constructor(protected http: HttpClient, private spinnerService: Ng4LoadingSpinnerService, private alertService: AlertService) {
     this.showTasks();
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.currentUser.username, "current user");
+
 
 
   }
@@ -52,26 +75,8 @@ export class Notification {
   }
 
 
+  public isActive: any = false;
 
-  message: string;
-
-  public task: any = {};
-  public tasks: any = [];
-  public show: number = 0;
-  public updtask: any = {};
-  public name: any = {};
-  public data: any = {};
-
-  public hide: number = 0;
-  public hidden: any = [];
-  public mapShowHide: number = 1;
-  public review: any = [];
-  public n: any = false;
-  public rating: number = 0;
-  public b: any = false;
-
-  public err:any={};
-  
 
   public submit() {
     this.spinnerService.show();
@@ -83,59 +88,61 @@ export class Notification {
 
     }
     this.task = this.rating;
-   // console.log(data, "asdada");
+    // console.log(data, "asdada");
     this.http.post(`tasks`, data).subscribe((res) => {
-  
+
       this.data = res;
 
-      if(this.data.message)
-      {
-        this.err="Duplicate name. plz try again";
-        console.log(this.err,"Validation error");
+      if (this.data.message) {
+        this.err = "Duplicate name. plz try again";
+        console.log(this.err, "Validation error");
         this.alertService.error(this.err);
         this.spinnerService.hide();
         return false;
       }
-    if(this.data.errors)
-    {
+      if (this.data.errors) {
         console.log("There are errors", this.data.message);
         this.spinnerService.hide();
         return false;
-    }
+      }
 
-    this.alertService.success('Task created succesfully', true);
+      this.alertService.success('Task created succesfully', true);
+
       this.task = "";
       this.rating = 0;
-      
+
       this.show = 0;
       this.b = true;
-      
-      
-        this.spinnerService.hide();
+
+
+      this.spinnerService.hide();
       console.log(this.data);
       this.showTasks();
     },
-     (res) => { 
-      this.err=res.errors;
-      console.log(this.err);
-    });
+      (res) => {
+        this.err = res.errors;
+        console.log(this.err);
+      });
 
   }
 
 
   months = ["January", "February", "March", "April",
-  "May", "June", "July", "August", "September",
-  "October", "November", "December"];
+    "May", "June", "July", "August", "September",
+    "October", "November", "December"];
 
   changemonths(event) {
-   // alert("Changed month from the Dropdown");
-   // console.log(event);
+    // alert("Changed month from the Dropdown");
+    // console.log(event);
     console.log(event.target.value + " Clicked!");
-    let a= event.target.value;
+    let a = event.target.value;
     console.log(a, "latest");
- }
+  }
 
-
+  myClickFunction(e)
+  {
+    console.log(e.target.value + " Clicked!");
+  }
   public statuses: any = ['pending', 'ongoing', 'created'];
 
 
@@ -218,10 +225,10 @@ export class Notification {
 
   public showTasks() {
     this.http.get('tasks')
-    .subscribe((response) => {
-      this.tasks=response;
-      this.show=1;
-     }, (response) => { err => console.log(err)} );
+      .subscribe((response) => {
+        this.tasks = response;
+        this.show = 1;
+      }, (response) => { err => console.log(err) });
   }
 
 
@@ -241,7 +248,7 @@ export class Notification {
   //   }, (res) => { });
   // }
 
-public msg:any=" you want to delete "
+  public msg: any = " you want to delete "
   public delTask(id) {
     this.b = false;
     {

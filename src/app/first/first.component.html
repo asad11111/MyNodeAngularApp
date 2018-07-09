@@ -12,6 +12,8 @@
 
 
 
+
+
 <a [routerLink]="['/','charts']" >
   <p>My Charts</p>
 </a>
@@ -19,6 +21,11 @@
 <a [routerLink]="['/','demo1']" >
   <p>Data Table</p>
 </a>
+
+
+<app-parent></app-parent>
+<dynamic-form *ngIf="show==1" [dataObject]="dyn_data"></dynamic-form>
+<br>
 
 <div class="col-md-6 col-md-offset-3">
     <h1>Hi {{currentUser.firstName}}!</h1>
@@ -41,12 +48,29 @@
 </div>
 
 <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>Base64 Upload</h2>
+        <base64-upload></base64-upload>
+      </div>
+      <div class="col-sm-6">
+        <h2>Formdata Upload</h2>
+        <formdata-upload></formdata-upload>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+
+<div class="container">
     
   
 
     <div style="text-align:center">
       <h1>
-        Google Map Geolocation Demo
+        Google Map Geolocation
       </h1>
     </div>
   
@@ -89,7 +113,7 @@
 
 
 
- 
+
   
   </div>
 

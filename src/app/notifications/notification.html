@@ -1,3 +1,4 @@
+
 <div >
 
   <div>
@@ -12,6 +13,8 @@
 
        <button (click) = "myClickFunction($event)">Click Me</button>
 
+
+     
 
     <form>
       <div *ngIf="show==0" class="form-group row">
@@ -75,7 +78,7 @@
 
     <div class="container">
       <div class="table-responsive">
-        <table *ngIf="show==1" class="table">
+        <table *ngIf="show==1 " class="table">
           <thead>
             <tr>
               <th>ID</th>
@@ -89,6 +92,7 @@
             </tr> 
           </thead>
           <tbody>
+             
             <tr *ngFor="let data of tasks; let i = index">
               <td>{{i+1}}</td>
               <td>{{data.name}} </td>
@@ -117,6 +121,7 @@
 
             </tr>
 
+
           </tbody>
 
 
@@ -129,7 +134,7 @@
     <ngui-popup #popup></ngui-popup>
 
 
-
+    
 
 
 
