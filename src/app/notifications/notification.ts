@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertService, AuthenticationService } from '../_services/index';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { User } from '../_models/index';
+import { appConfig } from '../app.config';
 
 import 'rxjs/add/operator/map';
 import { } from '@types/googlemaps';
@@ -224,7 +225,7 @@ export class Notification {
   // }
 
   public showTasks() {
-    this.http.get('tasks')
+    this.http.get(appConfig.apiUrl + '/tasks')
       .subscribe((response) => {
         this.tasks = response;
         this.show = 1;

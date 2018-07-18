@@ -38,6 +38,7 @@ import * as $ from 'jquery';
 import { ChildComponent } from './child/child.component';
 import { ParentComponent } from './parent/parent.component';
 import { UmlComponent } from './umlapp/umlapp.component';
+import {EditorComponent} from './editorComponent/editor.component';
 
 declare let require: any;
 
@@ -72,6 +73,7 @@ const rootRouterConfig: Routes = [
   declarations: [
     AppComponent,
     FirstComponent,
+    EditorComponent,
     UmlComponent,
     DynamicFormComponent,
     MessagesComponent,
