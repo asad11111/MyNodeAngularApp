@@ -37,13 +37,15 @@ import { FormdataUploadComponent } from './formdata-upload/formdata-upload.compo
 import * as $ from 'jquery';
 import { ChildComponent } from './child/child.component';
 import { ParentComponent } from './parent/parent.component';
+import { UmlComponent } from './umlapp/umlapp.component';
 
 declare let require: any;
 
 
 const rootRouterConfig: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'first',  component: FirstComponent,  canActivate: [AuthGuard], resolve: { maps: MapsResolver } },
+  { path: '',  component: FirstComponent, canActivate: [AuthGuard] , resolve: { maps: MapsResolver } },
+  { path: 'login', component: LoginComponent },
+  { path: 'uml', component: UmlComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'child', component: ChildComponent },
   {
@@ -70,6 +72,7 @@ const rootRouterConfig: Routes = [
   declarations: [
     AppComponent,
     FirstComponent,
+    UmlComponent,
     DynamicFormComponent,
     MessagesComponent,
     ChartsComponent,
@@ -81,7 +84,8 @@ const rootRouterConfig: Routes = [
     RegisterComponent,
     googleMaps,
     ChildComponent,
-    ParentComponent
+    ParentComponent,
+    UmlComponent
   ],
 
   imports: [

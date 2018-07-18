@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {SharedModule} from '../shared/shared.module';
 import {TopNav} from './topnav';
 import {FooterNave} from './footer-nave';
-import {Shell} from './shell';
+import {Shell }  from './shell';
 
 
 @NgModule({

@@ -9,6 +9,7 @@ import { DataserviceService } from '../_services/dataservice.service';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { person } from '../person';
 import { HttpClient } from '@angular/common/http';
+import { test } from '../../assets/js/UiScript';
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
@@ -24,70 +25,70 @@ export class FirstComponent implements OnInit {
   public circle;
   public map_circle: any = true;
   currentLat: any;
-  currentLong: any; 
+  currentLong: any;
   public job: any = {};
-  public show:any=0;
+  public show: any = 0;
   currentUser: User;
   users: User[] = [];
   tasks: any = [];
-  public dyn_data:any= {}
-    
-      // {
-      //  "name": {
-      //     "label": "Name",
-      //     "value": "Asad",
-      //     "type": "text",
-    
-          
-      //     "validation": {
-      //       "required": true
-      //     }
-      //   },
-      //   "age": {
-      //     "label": "Age",
-      //     "value": 32,
-      //     "type": "text",
-          
-      //     "validation": {
-      //      "required": true
-      //     }
-      //   }
-      // }
-       
-    
-   // ;
+  public dyn_data: any = {}
+
+  // {
+  //  "name": {
+  //     "label": "Name",
+  //     "value": "Asad",
+  //     "type": "text",
+
+
+  //     "validation": {
+  //       "required": true
+  //     }
+  //   },
+  //   "age": {
+  //     "label": "Age",
+  //     "value": 32,
+  //     "type": "text",
+
+  //     "validation": {
+  //      "required": true
+  //     }
+  //   }
+  // }
+
+
+  // ;
   person;
   filesToUpload: Array<File>;
- public new:any={};
+  public new: any = {};
 
   marker: google.maps.Marker;
   constructor(protected http: HttpClient, private spinnerService: Ng4LoadingSpinnerService, private router: Router, private userService: UserService, private mydata: DataserviceService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     console.log(this.currentUser.username, "current user");
     this.filesToUpload = [];
-   // this.new= this.showdat();
-   // console.log(this.new, 'new');
+    // this.new= this.showdat();
+    // console.log(this.new, 'new');
 
-   // console.log(this.dyn_data, "person");
+    // console.log(this.dyn_data, "person");
 
-  
+
   }
 
   ngOnInit() {
-  
-    
-  
-   // this.new= this.showdat();
-  
-    this.showDynm();
-      
-    this.showTasks();
-  // this.new= this.showDynm();
-  // console.log(this.new, 'new');
-    this.person = person;
-   //console.log(this.dyn_data, "nklhnkjhkjb");
 
-   
+
+
+    // this.new= this.showdat();
+
+    this.showDynm();
+
+    this.showTasks();
+    // this.new= this.showDynm();
+    // console.log(this.new, 'new');
+    this.person = person;
+    //console.log(this.dyn_data, "nklhnkjhkjb");
+
+
     this.loadAllUsers();
     var mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
@@ -99,13 +100,13 @@ export class FirstComponent implements OnInit {
   }
 
 
-  public data:any={};
+  public data: any = {};
 
 
 
-  
 
- 
+
+
 
   showTasks() {
     this.tasks = this.mydata.showTasks().subscribe((response) => {
@@ -117,11 +118,11 @@ export class FirstComponent implements OnInit {
   }
 
   showDynm() {
-   
-   return  this.dyn_data = this.mydata.showData().subscribe((response) => {
-      this.show=1;
+
+    return this.dyn_data = this.mydata.showData().subscribe((response) => {
+      this.show = 1;
       this.dyn_data = response;
-    
+
       console.log(this.dyn_data, "person");;
 
     }, (response) => { err => console.log(err) });
@@ -134,7 +135,7 @@ export class FirstComponent implements OnInit {
   //  this.http.get('data').subscribe((res) => {
 
   //   return   this.dyn_data = res;
-   
+
   //    // console.log(this.dyn_data, "acces")
 
   //   },
@@ -146,7 +147,7 @@ export class FirstComponent implements OnInit {
     this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
   }
 
-  private loadAllUsers() {
+  public loadAllUsers() {
     this.userService.getAll().subscribe(users => { this.users = users; });
     // console.log(this.users);
   }
@@ -247,6 +248,15 @@ export class FirstComponent implements OnInit {
     else {
       this.marker.setPosition(location);
     }
+  }
+
+
+  public aaa(a) {
+    if (a == 'c')
+      test(a);
+
+    if (a == 'a')
+      test(a)
   }
 
 }

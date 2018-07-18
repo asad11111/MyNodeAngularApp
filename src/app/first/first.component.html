@@ -22,6 +22,10 @@
   <p>Data Table</p>
 </a>
 
+<a [routerLink]="['/','uml']" >
+  <p>Uml</p>
+</a>
+
 
 <app-parent></app-parent>
 <dynamic-form *ngIf="show==1" [dataObject]="dyn_data"></dynamic-form>
@@ -82,7 +86,6 @@
           
         <button class="btn btn-primary" [disabled]="isTracking"   (click)="findMe()"> <i  (click)="findMe()" class="fa fa-location-arrow"></i>  </button> 
         <button class="btn btn-primary" (click)="trackMe()">Track me</button>
-        <button class="btn btn-primary" (click)="  ping()">  ping me</button>
       
         <button class="btn btn-primary" (click)="placeCircle()">Place Circle</button>
         <button class="btn btn-primary" (click)="routeToNotifications()">Go to Notifications</button>
@@ -111,10 +114,10 @@
     </div>
     <br>
 
-
+   
 
 
   
   </div>
 
-  
+

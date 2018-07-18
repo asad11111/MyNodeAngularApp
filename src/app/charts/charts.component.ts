@@ -96,16 +96,12 @@ export class ChartsComponent implements OnInit {
     
   }
   chartLabels: string[] = Object.keys(this.voteCount);
-  chartData: number[] = Object.values(this.voteCount);
+
   chartType = 'bar';
 
 
   ngOnInit() {
     const channel = this.pusher.init();
-    channel.bind('vote', ({ player }) => {
-      this.voteCount[player] += 1;
-      // Update the chartData whenever there's a new vote
-      this.chartData = Object.values(this.voteCount);
-    });
+ 
    }
  } 

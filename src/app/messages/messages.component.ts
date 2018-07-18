@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { person } from '../person';
 interface Message {
   text: String;
-  user: string;
+  user: String;
 }
 
 @Component({
@@ -141,7 +141,7 @@ export class MessagesComponent implements OnInit {
 
 
 
-  sendMessage(user: string, text: string) {
+  sendMessage(user: String, text: String) {
     const message: Message = {
       user: user,
       text: text,

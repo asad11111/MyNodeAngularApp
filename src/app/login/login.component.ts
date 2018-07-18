@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
-                    this.router.navigate(['/','first']);
+                    this.router.navigate(['']);
                 },
                 error => {
                     this.alertService.error(error);
